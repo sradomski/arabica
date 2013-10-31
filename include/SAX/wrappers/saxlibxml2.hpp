@@ -260,9 +260,9 @@ libxml2_wrapper<string_type, T0, T1>::libxml2_wrapper() :
   lexicalHandler_(0),
   locator_(0),
   parsing_(false),
-  isInCData_(false),
   namespaces_(true),
-  prefixes_(true)
+  prefixes_(true),
+  isInCData_(false)
 {
   context_ = xmlCreatePushParserCtxt(libxml2_wrapper_impl_tiddle::lwit_SaxHandler(),
                                      reinterpret_cast<void*>(static_cast<libxml2_wrapper_impl_tiddle::libxml2_base*>(this)),

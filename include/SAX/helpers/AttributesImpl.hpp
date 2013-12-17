@@ -546,9 +546,9 @@ private:
   void badIndex(unsigned int index)
   {
     // sort out
-    std::string msg =
-	    "Attempt to modify attribute at illegal index: " + index;
-    throw std::out_of_range(msg);
+    std::stringstream msg;
+    msg << "Attempt to modify attribute at illegal index: " << index;
+    throw std::out_of_range(msg.str());
   }
 
   class AttributeNamed

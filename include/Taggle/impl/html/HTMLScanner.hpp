@@ -473,7 +473,9 @@ public:
           outputBuffer_.clear();
           break;
         default:
-          throw std::runtime_error("Can't process state " + action);
+          std::stringstream msg;
+          msg << "Can't process state " << action;
+          throw std::runtime_error(msg.str());
       } // switch ...
       state_ = nextState_;
     } // while (state_ != S_DONE) 

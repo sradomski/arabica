@@ -415,7 +415,7 @@ class DocumentImpl : public DOM::Document_impl<stringT, string_adaptorT>,
     {
       checkChildType(newChild);
 
-      if((newChild->getNodeType() == DOM::Node_base::DOCUMENT_TYPE_NODE) && (documentType_ == oldChild))
+      if((newChild->getNodeType() == DOM::Node_base::DOCUMENT_TYPE_NODE) && documentType_ == oldChild)
         throw DOM::DOMException(DOM::DOMException::HIERARCHY_REQUEST_ERR);
       if((newChild->getNodeType() == DOM::Node_base::ELEMENT_NODE) && 
          (documentElement_ != 0) && 
@@ -433,7 +433,7 @@ class DocumentImpl : public DOM::Document_impl<stringT, string_adaptorT>,
 
     virtual DOMNode_implT* removeChild(DOMNode_implT* oldChild)
     {
-      if((documentType_ == oldChild))
+      if(documentType_ == oldChild)
         throw DOM::DOMException(DOM::DOMException::HIERARCHY_REQUEST_ERR);
       DOMNode_implT* result = NodeWithChildrenT::removeChild(oldChild);
  

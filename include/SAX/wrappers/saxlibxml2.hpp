@@ -43,7 +43,8 @@ class libxml2_base
   protected:
     virtual ~libxml2_base() { }
 
-  private:
+    // pragmatic solution for linkage problem with llvm
+  public:
     virtual void SAXstartDocument() = 0;
     virtual void SAXendDocument() = 0;
     virtual void SAXlocator(xmlSAXLocatorPtr locator) = 0;
@@ -67,7 +68,7 @@ class libxml2_base
 
     virtual void SAXstartCdataSection() = 0;
     virtual void SAXendCdataSection() = 0;
-    
+#if 0
     friend void lwit_startDocument(void* user_data);
     friend void lwit_endDocument(void* user_data);
     friend void lwit_characters(void *user_data, const xmlChar* ch, int len);
@@ -88,6 +89,7 @@ class libxml2_base
     friend void lwit_entityDecl(void* user_data, const xmlChar *name, int type, const xmlChar *publicId, const xmlChar *systemId,	xmlChar *content);
     friend xmlEntityPtr lwit_getEntity(void* user_data, const xmlChar* name);
     friend xmlParserInputPtr lwit_resolveEntity(void* user_data, const xmlChar* publicId, const xmlChar* systemId);
+#endif
 }; // class libxml2_base
 
 void lwit_startDocument(void* user_data);
@@ -106,7 +108,7 @@ void lwit_locator(void* user_data, xmlSAXLocatorPtr locator);
 void lwit_notationDecl(void* user_data, const xmlChar *name, const xmlChar *publicId, const xmlChar *systemId);
 void lwit_unparsedEntityDecl(void* user_data,
                            const xmlChar *name, const xmlChar *publicId,
-			                     const xmlChar *systemId, const xmlChar *notationName);
+                           const xmlChar *systemId, const xmlChar *notationName);
 void lwit_elementDecl(void* user_date, const xmlChar *name, int type, xmlElementContentPtr content);
 void lwit_attributeDecl(void *user_data, const xmlChar *elem, const xmlChar *fullname, int type, int def, const xmlChar *defaultValue, xmlEnumerationPtr tree);
 void lwit_entityDecl(void* user_data, const xmlChar *name, int type, const xmlChar *publicId, const xmlChar *systemId,	xmlChar *content);
